@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="kolkataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="An">
+    <Key>
+      <PropertyRef Name="AnsID" />
+    </Key>
+    <Property Name="AnsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionID" Type="Int32" Nullable="false" />
+    <Property Name="Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Task1" Relationship="Self.FK_Ans_Task1" FromRole="Ans" ToRole="Task1" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Task1" Relationship="Self.FK_Task1_Course" FromRole="Course" ToRole="Task1" />
+  </EntityType>
+  <EntityType Name="Reg">
+    <Key>
+      <PropertyRef Name="RegID" />
+    </Key>
+    <Property Name="RegID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ConfirmPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateOFBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Task1" Relationship="Self.FK_Task1_Reg" FromRole="Reg" ToRole="Task1" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Task1">
+    <Key>
+      <PropertyRef Name="TaskID" />
+    </Key>
+    <Property Name="TaskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RegID" Type="Int32" Nullable="false" />
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="Question" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Ans" Relationship="Self.FK_Ans_Task1" FromRole="Task1" ToRole="Ans" />
+    <NavigationProperty Name="Course" Relationship="Self.FK_Task1_Course" FromRole="Task1" ToRole="Course" />
+    <NavigationProperty Name="Reg" Relationship="Self.FK_Task1_Reg" FromRole="Task1" ToRole="Reg" />
+  </EntityType>
+  <Association Name="FK_Ans_Task1">
+    <End Role="Task1" Type="Self.Task1" Multiplicity="1" />
+    <End Role="Ans" Type="Self.An" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task1">
+        <PropertyRef Name="TaskID" />
+      </Principal>
+      <Dependent Role="Ans">
+        <PropertyRef Name="QuestionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task1_Course">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="Task1" Type="Self.Task1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Task1">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task1_Reg">
+    <End Role="Reg" Type="Self.Reg" Multiplicity="1" />
+    <End Role="Task1" Type="Self.Task1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reg">
+        <PropertyRef Name="RegID" />
+      </Principal>
+      <Dependent Role="Task1">
+        <PropertyRef Name="RegID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="kolkataEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Ans" EntityType="Self.An" />
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="Regs" EntityType="Self.Reg" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Task1" EntityType="Self.Task1" />
+    <AssociationSet Name="FK_Ans_Task1" Association="Self.FK_Ans_Task1">
+      <End Role="Task1" EntitySet="Task1" />
+      <End Role="Ans" EntitySet="Ans" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task1_Course" Association="Self.FK_Task1_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="Task1" EntitySet="Task1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task1_Reg" Association="Self.FK_Task1_Reg">
+      <End Role="Reg" EntitySet="Regs" />
+      <End Role="Task1" EntitySet="Task1" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

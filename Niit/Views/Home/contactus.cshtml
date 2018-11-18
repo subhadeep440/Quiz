@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+        .container {
+            border-radius: 5px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body background="kk.jpg">
+
+    <h3><font color="red"><center><b>Contact Form</b></center></font></h3>
+    <p alingh="center">
+
+        <div class="container">
+            <form action="/action_page.php">
+                <label for="fname"><b>First Name</b></label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                <br />
+
+                <label for="lname"><b>Last Name</b></label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                
+                <br />
+                <label for="country"><b>Country</b></label>
+                <select id="country" name="country">
+                    <option value="australia">Australia</option>
+                    <option value="canada">Canada</option>
+                    <option value="India">India</option>
+                    <option value="China">China</option>
+                    <option value="Usa">USA</option>
+                    <option value="England">England</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Newseland">Newseland</option>
+                    <option value="Germany">Germany</option>
+                </select>
+                <br />
+
+                <label for="Subject"><b>Message</b></label>
+                <br />
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+                <br />
+
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        </form>
+    <p alingh="center">
+        <a href="https://www.facebook.com/NIIT4u/" target="_top"><img src="~/image/fb.jpg" height="35px" width="35px" /></a>
+        <a href="http://www.googleplus.com" target="_top"><img src="~/image/g.png" height="35px" width="35px" /></a>
+        <a href="http://twitter.com/NIITLtd" target="_top"><img src=" ~/image/twitter.jpg" height="35px" width="35px" /></a>
+        <a href="http://www.instagram.com" target="_top"><img src="~/image/insta.jpg" height="35px" width="35px" /></a>
+        <a href="http://www.line.com" target="_top"><img src="~/image/line.jpg" height="35px" width="35px" /></a>
+        <a href="http://www.skype.com" target="_top"><img src="~/image/skype.jpg" height="35px" width="35px" /></a>
+        <a href="http://www.youtube.com/user/niitcareers" target="_top"><img src=" ~/image/youtube.png" height="35px" width="35px" /></a>
+
+
+
+        </div>
+</body>
+</html>
